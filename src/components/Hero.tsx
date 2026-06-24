@@ -93,22 +93,27 @@ export function Hero() {
           between academic education and real-world job readiness.
         </motion.p>
 
+        {/* Testing Status Notice */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mb-8 max-w-2xl bg-emerald-950/30 border border-emerald-500/20 rounded-2xl p-5 text-sm text-emerald-300/95 shadow-lg backdrop-blur-md relative z-30"
+        >
+          <span className="font-bold text-white block mb-1">📢 Status Update</span>
+          Way2Better is currently in the final stages of testing and platform validation. Public access will be available soon.
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
           className="flex flex-col sm:flex-row items-center gap-4"
         >
-          <div className="relative p-[1.5px] rounded-full overflow-hidden group/btn">
-            {/* Animated Glow Border */}
-            <div className="absolute inset-[-200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0%,#BEF264_25%,transparent_50%,#BEF264_75%,transparent_100%)] opacity-30 group-hover/btn:opacity-100 group-hover/btn:animate-[spin_2s_linear_infinite] transition-all" />
-
-            <a href={CONFIG.REGISTER_URL} className="group relative z-10 flex items-center gap-3 bg-white text-slate-950 pl-4 pr-2 py-1.5 rounded-full font-bold hover:bg-slate-50 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-              Start Your Journey
-              <div className="bg-primary-300 text-slate-950 p-2 rounded-full group-hover:bg-primary-400 transition-colors">
-                <ArrowRight className="w-4 h-4 animate-bounce-x" />
-              </div>
-            </a>
+          <div className="relative p-[1.5px] rounded-full overflow-hidden">
+            <div className="group relative z-10 flex items-center gap-3 bg-white/10 border border-white/20 text-slate-300 px-6 py-3 rounded-full font-bold cursor-default shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+              Platform Under Final Testing
+            </div>
           </div>
         </motion.div>
 

@@ -25,14 +25,10 @@ export function FinalCTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-          <div className="relative p-[1.5px] rounded-full overflow-hidden group/btn">
-            {/* Animated Glow Border */}
-            <div className="absolute inset-[-200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg_at_50%_50%,transparent_0%,#059669_25%,transparent_50%,#059669_75%,transparent_100%)] opacity-30 group-hover/btn:opacity-100 group-hover/btn:animate-[spin_2s_linear_infinite] transition-all" />
-
-            <a href={CONFIG.REGISTER_URL} className="group relative z-10 flex items-center justify-center gap-3 bg-[#16382D] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#0A1A14] shadow-lg transition-all">
-              Get Started Free
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
+          <div className="relative p-[1.5px] rounded-full overflow-hidden">
+            <div className="group relative z-10 flex items-center justify-center gap-3 bg-[#16382D]/80 text-white/80 px-8 py-4 rounded-full font-bold text-lg cursor-default shadow-lg">
+              Coming Soon
+            </div>
           </div>
           <a href="/pricing.html" className="flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-lg bg-white border border-[#16382D]/20 text-[#16382D] hover:bg-[#E6EFEA] transition-all shadow-sm">
             View Pricing

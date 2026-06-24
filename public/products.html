@@ -34,10 +34,11 @@
   </script>
 
   <style>
-    body {
+    html, body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
       overflow-x: hidden;
+      max-width: 100%;
       background-color: #050805;
       color: #e5e7eb;
     }
@@ -183,9 +184,11 @@
 
     #scene {
       height: 100vh;
-      width: 100vw;
+      width: 100%;
+      max-width: 100vw;
       transform-origin: center;
       will-change: transform;
+      overflow-x: hidden;
     }
 
     /* ================= CARD ================= */
@@ -404,9 +407,7 @@
 
     <!-- UI Actions -->
     <div class="flex items-center gap-6">
-      <a href="login.html" class="hidden sm:block text-slate-400 hover:text-white transition text-sm font-semibold">Log
-        in</a>
-      <a href="signup.html" class="hidden md:block nav-btn-white">Get Started</a>
+      <span class="hidden md:block px-5 py-2 bg-white/10 text-slate-400 border border-white/10 rounded-full text-sm font-bold cursor-default shadow-sm">Coming Soon</span>
 
       <!-- Hamburger -->
       <button id="menu-toggle" class="lg:hidden text-white text-xl focus:outline-none ml-2">
@@ -434,15 +435,10 @@
         <a href="about.html" class="text-slate-300 hover:text-primary-300 transition">About Us</a>
       </nav>
       <div class="mt-auto space-y-4">
-        <!-- Install PWA Button -->
-        <button id="pwa-install-btn" onclick="installApp()"
-          class="flex w-full items-center justify-center gap-2 bg-white/5 border border-white/10 text-white py-4 rounded-2xl font-bold hover:bg-white/10 transition-colors">
-          <i class="fas fa-download text-primary-300"></i> Install App
-        </button>
-        <a href="signup.html"
-          class="flex items-center justify-center gap-2 w-full bg-white text-slate-950 py-4 rounded-2xl font-black hover:bg-slate-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-          Get Started
-        </a>
+        <span
+          class="flex items-center justify-center gap-2 w-full bg-white/10 text-slate-400 py-4 rounded-2xl font-black border border-white/10 cursor-default">
+          Coming Soon
+        </span>
       </div>
     </div>
   </div>
@@ -469,10 +465,10 @@
           professional. Explore the tools that will redefine your journey.
         </p>
         <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-5 hero-animate hero-delay-4">
-          <a href="signup.html"
-            class="btn-glow w-full md:w-auto bg-primary-300 text-slate-950 px-8 py-4 rounded-full font-semibold hover:scale-105 transition text-center">
-            Sign Up Now
-          </a>
+          <span
+            class="w-full md:w-auto bg-white/10 border border-white/10 text-slate-400 px-8 py-4 rounded-full font-semibold cursor-default text-center">
+            Coming Soon
+          </span>
           <a href="#integrated-ecosystem"
             class="w-full md:w-auto px-8 py-4 rounded-full border border-white/10 text-primary-300 font-semibold hover:bg-transparent border border-white/5/5 transition text-center">
             Explore Features
@@ -492,7 +488,7 @@
   </div>
 
   <!-- ================= AGENT KNOTT ================= -->
-  <section class="py-24 px-6 md:px-20 border-t border-white/5">
+  <section id="integrated-ecosystem" class="py-24 px-6 md:px-20 border-t border-white/5">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
       <!-- Visual -->
@@ -1256,147 +1252,194 @@
   </section>
 
   <!-- ================= INSTITUTIONAL COMMAND CENTER ================= -->
-  <section class="py-24 px-6 md:px-20 border-t border-white/5">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-      <!-- Visual -->
+  <section class="py-24 px-6 md:px-20 border-t border-white/5 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-cyan-950/20 via-slate-950 to-slate-950 pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Visual Column (Dashboard Screenshot) -->
       <div class="relative">
         <div class="absolute inset-0 bg-cyan-500 rounded-full blur-3xl opacity-10"></div>
-        <div class="glass-card rounded-[2.5rem] p-8 border border-cyan-500/15 relative z-10 overflow-hidden">
-          <div class="flex items-center justify-between mb-6">
-            <div>
-              <h4 class="font-bold text-white">College Admin</h4>
-              <p class="text-xs text-slate-400">Dashboard View</p>
-            </div>
-            <div class="flex gap-2">
-              <div
-                class="w-8 h-8 rounded-lg bg-slate-800 border border-white/10 flex items-center justify-center text-slate-400">
-                <i class="fas fa-bell text-xs"></i>
-              </div>
-              <div
-                class="w-8 h-8 rounded-lg bg-primary-300/20 border border-primary-300/30 flex items-center justify-center text-primary-300">
-                <i class="fas fa-plus text-xs"></i>
+        <div class="glass-card rounded-[2.5rem] p-4 border border-cyan-500/15 relative z-10 shadow-[0_0_50px_rgba(6,182,212,0.1)]">
+          <div class="bg-slate-900 rounded-2xl overflow-hidden border border-white/5 shadow-2xl relative">
+            <div class="bg-white/5 px-4 py-2 flex items-center gap-1.5 border-b border-white/10">
+              <div class="w-2 h-2 rounded-full bg-red-500/80"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/80"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/80"></div>
+              <div class="ml-4 bg-slate-950 rounded-md px-3 py-0.5 text-[10px] text-slate-500 flex-1 text-center font-mono max-w-[200px] truncate">
+                dashboard.way2better.com
               </div>
             </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4 mb-5">
-            <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-              <div class="text-xs text-slate-400 mb-1">Total Students</div>
-              <div class="text-2xl font-bold text-white">12,450</div>
-              <div class="text-[10px] text-primary-300 font-bold mt-1">▲ 12% vs last sem</div>
-            </div>
-            <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-              <div class="text-xs text-slate-400 mb-1">Avg Skill Score</div>
-              <div class="text-2xl font-bold text-white">88.4</div>
-              <div class="text-[10px] text-primary-300 font-bold mt-1">▲ 5.2% improvement</div>
-            </div>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
-            <div class="p-3 border-b border-white/10 bg-white/5 text-xs font-bold text-slate-400 flex justify-between">
-              <span>Top Performers</span><span>Status</span>
-            </div>
-            <div class="p-3 flex items-center justify-between border-b border-white/5">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-slate-800"></div>
-                <div>
-                  <div class="text-sm font-bold text-white">Alex M.</div>
-                  <div class="text-[10px] text-slate-400">Computer Science</div>
-                </div>
-              </div>
-              <span
-                class="px-2 py-1 rounded-full bg-primary-300/20 text-primary-300 text-[10px] font-bold border border-primary-300/20">Ready</span>
-            </div>
-            <div class="p-3 flex items-center justify-between border-b border-white/5">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-slate-800"></div>
-                <div>
-                  <div class="text-sm font-bold text-white">Sarah J.</div>
-                  <div class="text-[10px] text-slate-400">Data Science</div>
-                </div>
-              </div>
-              <span
-                class="px-2 py-1 rounded-full bg-primary-300/20 text-primary-300 text-[10px] font-bold border border-primary-300/20">Ready</span>
-            </div>
-            <div class="p-3 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-slate-800"></div>
-                <div>
-                  <div class="text-sm font-bold text-white">Mike T.</div>
-                  <div class="text-[10px] text-slate-400">Engineering</div>
-                </div>
-              </div>
-              <span
-                class="px-2 py-1 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold border border-amber-500/20">Focus
-                Needed</span>
-            </div>
+            <img
+              src="institutional_dashboard.png"
+              alt="Way2Better Institutional Command Center – AI-powered college dashboard overview"
+              class="w-full h-auto object-cover rounded-b-2xl"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
-      <!-- Content -->
+
+      <!-- Content Column -->
       <div>
-        <div
-          class="inline-flex items-center mb-4 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold tracking-wide uppercase">
-          For Institutions</div>
-        <h2 class="text-4xl font-bold text-white mb-6">Institutional <span class="text-cyan-400">Command Center</span>
+        <div class="inline-flex items-center mb-4 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold tracking-widest uppercase">
+          🏫 For Institutions
+        </div>
+        <h2 class="text-4xl font-bold text-white mb-6">
+          Institutional <span class="text-cyan-400">Command Center</span>
         </h2>
-        <p class="text-lg text-slate-400 mb-8 leading-relaxed">Administer your entire college from a single, powerful
-          platform. Identify potential, track performance, and drive career outcomes at scale.</p>
+        <p class="text-lg text-slate-400 mb-8 leading-relaxed">
+          Administer your entire college from a single, powerful AI platform. Identify potential, track performance, and drive career outcomes at scale.
+        </p>
+
+        <!-- Standard 2-column feature list -->
         <div class="grid sm:grid-cols-2 gap-y-8 gap-x-6">
+          <!-- 1 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-network-wired"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-heartbeat"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Unified Campus Control</h4>
-              <p class="text-slate-400 mt-1 text-sm">Control entire college operations under one centralized platform.
-              </p>
+              <h4 class="font-bold text-white text-base">AI-Powered College Health Dashboard</h4>
+              <p class="text-slate-400 mt-1 text-sm">Real-time visibility into student engagement, performance, and career readiness.</p>
             </div>
           </div>
+
+          <!-- 2 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-stopwatch"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-chart-bar"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Real-Time Scorecard</h4>
-              <p class="text-slate-400 mt-1 text-sm">Identify every user's potential instantly with live scoring and
-                analytics.</p>
+              <h4 class="font-bold text-white text-base">Placement Readiness Analytics</h4>
+              <p class="text-slate-400 mt-1 text-sm">Track placement preparedness across departments, batches, and individual students.</p>
             </div>
           </div>
+
+          <!-- 3 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-chart-line"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-file-alt"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Performance Tracking</h4>
-              <p class="text-slate-400 mt-1 text-sm">Monitor academic and skill-based performance trends across
-                departments.</p>
+              <h4 class="font-bold text-white text-base">Automated Institutional Reports</h4>
+              <p class="text-slate-400 mt-1 text-sm">Generate placement, skill gap, progress, and performance reports instantly.</p>
             </div>
           </div>
+
+          <!-- 4 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-crosshairs"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-robot"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Targeted Focus</h4>
-              <p class="text-slate-400 mt-1 text-sm">Identify at-risk students and provide additional focus to boost
-                their growth.</p>
+              <h4 class="font-bold text-white text-base">24×7 Dedicated AI College Administrator</h4>
+              <p class="text-slate-400 mt-1 text-sm">Continuously monitors student activities and identifies risks and opportunities.</p>
             </div>
           </div>
+
+          <!-- 5 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-rocket"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-bell"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Placement Accelerator</h4>
-              <p class="text-slate-400 mt-1 text-sm">Ensure students are trained on industry-demand roles to meet market
-                needs.</p>
+              <h4 class="font-bold text-white text-base">Smart Alerts &amp; Notifications</h4>
+              <p class="text-slate-400 mt-1 text-sm">Automated alerts for low-performing students, pending activities, and placement opportunities.</p>
             </div>
           </div>
+
+          <!-- 6 -->
           <div class="flex items-start gap-4">
-            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20"><i
-                class="fas fa-route"></i></div>
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-comments"></i>
+            </div>
             <div>
-              <h4 class="font-bold text-white text-base">Transition Analytics</h4>
-              <p class="text-slate-400 mt-1 text-sm">Track end-to-end user transitions from student to employed
-                professional.</p>
+              <h4 class="font-bold text-white text-base">Centralized Communication Hub</h4>
+              <p class="text-slate-400 mt-1 text-sm">Manage communication with students, faculty, placement teams, and departments from one platform.</p>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-magic"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Way2Better AI Assistant</h4>
+              <p class="text-slate-400 mt-1 text-sm">Generate reports, insights, summaries, and analytics using simple natural language prompts.</p>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-search-plus"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Institution-Wide Skill Gap Analysis</h4>
+              <p class="text-slate-400 mt-1 text-sm">Identify skill deficiencies across students and departments with actionable recommendations.</p>
+            </div>
+          </div>
+
+          <!-- 9 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Career Readiness Tracking</h4>
+              <p class="text-slate-400 mt-1 text-sm">Measure and improve student employability through AI-driven career intelligence.</p>
+            </div>
+          </div>
+
+          <!-- 10 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Placement Management Dashboard</h4>
+              <p class="text-slate-400 mt-1 text-sm">Track applications, interviews, offers, placements, and placement trends.</p>
+            </div>
+          </div>
+
+          <!-- 11 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-users-cog"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Bulk Student Management</h4>
+              <p class="text-slate-400 mt-1 text-sm">Easily onboard, manage, and monitor thousands of students from a single dashboard.</p>
+            </div>
+          </div>
+
+          <!-- 12 -->
+          <div class="flex items-start gap-4">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Role-Based Access Control</h4>
+              <p class="text-slate-400 mt-1 text-sm">Separate access levels for management, placement officers, faculty, and students.</p>
+            </div>
+          </div>
+
+          <!-- 13 -->
+          <div class="flex items-start gap-4 sm:col-span-2">
+            <div class="feature-icon-wrap mt-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/20">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-white text-base">Dedicated Success Manager &amp; Priority Support</h4>
+              <p class="text-slate-400 mt-1 text-sm">Personalized onboarding, training, and ongoing support for the institution.</p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -1424,10 +1467,10 @@
         </div>
       </div>
       <div class="mt-12">
-        <a href="signup.html"
-          class="inline-flex items-center gap-3 bg-primary-300 text-slate-950 px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition shadow-[0_0_40px_rgba(190,242,100,0.25)]">
-          Start Your Journey <i class="fas fa-arrow-right"></i>
-        </a>
+        <span
+          class="inline-flex items-center gap-3 bg-white/10 border border-white/10 text-slate-400 px-10 py-5 rounded-full font-bold text-lg cursor-default">
+          Platform Under Final Testing
+        </span>
       </div>
     </div>
   </section>

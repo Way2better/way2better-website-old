@@ -1,23 +1,22 @@
 window.CONFIG = {
   MARKETING_URL: 'https://way2better.com',
-  APP_URL: 'https://app.way2better.com',
-  LOGIN_URL: 'https://app.way2better.com/login',
-  REGISTER_URL: 'https://app.way2better.com/register'
+  APP_URL: '#',
+  LOGIN_URL: '#',
+  REGISTER_URL: '#'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Automatically rewrite any local/relative login or signup references in HTML templates
-  document.querySelectorAll('a[href*="login.html"]').forEach(el => {
-    const href = el.getAttribute('href');
-    if (href.includes('redirect=')) {
-      const redirectPage = href.split('redirect=').pop();
-      el.setAttribute('href', `${window.CONFIG.LOGIN_URL}?redirect=${redirectPage}`);
+  // Remove and replace any login/signup entry points in the DOM
+  document.querySelectorAll('a[href*="login.html"], a[href*="signup.html"]').forEach(el => {
+    el.removeAttribute('href');
+    el.style.pointerEvents = 'none';
+    el.style.opacity = '0.6';
+    el.style.cursor = 'default';
+    
+    if (el.textContent.toLowerCase().includes('log')) {
+      el.style.display = 'none';
     } else {
-      el.setAttribute('href', window.CONFIG.LOGIN_URL);
+      el.textContent = 'Coming Soon';
     }
-  });
-
-  document.querySelectorAll('a[href*="signup.html"]').forEach(el => {
-    el.setAttribute('href', window.CONFIG.REGISTER_URL);
   });
 });

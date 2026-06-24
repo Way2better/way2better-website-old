@@ -116,10 +116,10 @@ export function Problem() {
             </div>
 
             <div className="mt-12">
-              <button className="bg-[#16382D] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#0A1A14] transition-colors flex items-center gap-2">
+              <a href="/products.html" className="bg-[#16382D] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#0A1A14] transition-colors inline-flex items-center gap-2">
                 See Our AI Agents
                 <ChevronRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
 

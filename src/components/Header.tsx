@@ -62,18 +62,11 @@ export function Header() {
         </div>
 
         <div className="relative z-10 flex items-center gap-2 md:gap-4">
-          <a
-            href={CONFIG.LOGIN_URL}
-            className={`hidden md:block text-sm font-bold transition-colors duration-500 ${navDarkText ? 'text-slate-700 hover:text-primary-600' : 'text-slate-300 hover:text-white'}`}
+          <span
+            className="hidden md:flex bg-white/10 text-slate-400 border border-white/10 px-5 py-2 rounded-full text-sm font-bold items-center gap-2 shadow-sm cursor-default"
           >
-            Log in
-          </a>
-          <a
-            href={CONFIG.REGISTER_URL}
-            className="hidden md:flex bg-white text-slate-950 px-5 py-2 rounded-full text-sm font-bold hover:bg-slate-200 transition-all items-center gap-2 shadow-sm"
-          >
-            Get Started
-          </a>
+            Platform Under Final Testing
+          </span>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -127,12 +120,11 @@ export function Header() {
             </div>
 
             <div className="mt-auto space-y-4">
-              <a
-                href={CONFIG.REGISTER_URL}
-                className="flex items-center justify-center gap-2 w-full bg-white text-slate-950 py-4 rounded-2xl font-black hover:bg-slate-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              <span
+                className="flex items-center justify-center gap-2 w-full bg-white/10 text-slate-400 py-4 rounded-2xl font-black border border-white/10 cursor-default"
               >
-                Get Started
-              </a>
+                Platform Under Final Testing
+              </span>
             </div>
           </motion.div>
         )}

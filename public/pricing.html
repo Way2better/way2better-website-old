@@ -720,6 +720,45 @@
       border-color: rgba(255, 255, 255, .06);
       padding-top: 1rem;
     }
+
+    /* ================= AUTH REQUIRED MODAL ================= */
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+    #auth-modal-card {
+      animation: modalSlideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    /* ================= TOAST NOTIFICATION ================= */
+    .toast-notif {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: rgba(11, 16, 12, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      color: #e5e7eb;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      z-index: 9999;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      max-width: 480px;
+      text-align: center;
+    }
+    .toast-notif.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .toast-notif.info    { border-color: rgba(59, 130, 246, 0.45);  }
+    .toast-notif.success { border-color: rgba(190, 242, 100, 0.45); }
+    .toast-notif.error   { border-color: rgba(239, 68, 68, 0.45);   }
   </style>
   <!-- Razorpay Standard Web Checkout SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -768,9 +807,7 @@
 
     <!-- UI Actions -->
     <div class="flex items-center gap-6">
-      <a href="login.html" class="hidden sm:block text-slate-400 hover:text-white transition text-sm font-semibold">Log
-        in</a>
-      <a href="signup.html" class="hidden md:block nav-btn-white">Get Started</a>
+      <span class="hidden md:block px-5 py-2 bg-white/10 text-slate-400 border border-white/10 rounded-full text-sm font-bold cursor-default shadow-sm">Coming Soon</span>
 
       <!-- Hamburger -->
       <button id="menu-toggle" class="lg:hidden text-white text-xl focus:outline-none ml-2">
@@ -800,15 +837,10 @@
         <a href="about.html" class="text-slate-300 hover:text-primary-300 transition">About Us</a>
       </nav>
       <div class="mt-auto space-y-4">
-        <!-- Install PWA Button -->
-        <button id="pwa-install-btn" onclick="installApp()"
-          class="flex w-full items-center justify-center gap-2 bg-white/5 border border-white/10 text-white py-4 rounded-2xl font-bold hover:bg-white/10 transition-colors">
-          <i class="fas fa-download text-primary-300"></i> Install App
-        </button>
-        <a href="signup.html"
-          class="flex items-center justify-center gap-2 w-full bg-white text-slate-950 py-4 rounded-2xl font-black hover:bg-slate-100 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-          Get Started
-        </a>
+        <span
+          class="flex items-center justify-center gap-2 w-full bg-white/10 text-slate-400 py-4 rounded-2xl font-black border border-white/10 cursor-default">
+          Coming Soon
+        </span>
       </div>
     </div>
   </div>
@@ -856,7 +888,7 @@
             <span class="w-2 h-2 rounded-full bg-red-500"></span> Limited Deal
           </div>
           <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
-            Unlock your true potential for just <span class="text-primary-300">₹5/day</span> with the Pro Annual Plan
+            Unlock your true potential for just <span class="text-primary-300">₹4/day</span> with the Starter Annual Plan
           </h2>
           <p class="text-slate-400 mt-2 text-sm md:text-base">
             Special offer for students. Accelerate your career intelligence journey with full access to core tools.
@@ -864,134 +896,172 @@
         </div>
         
         <div class="z-10 shrink-0 w-full md:w-auto">
-          <button onclick="selectProAnnual()" class="btn-glow w-full md:w-auto inline-flex items-center justify-center gap-3 bg-primary-300 text-slate-950 px-8 py-4 rounded-2xl font-extrabold text-base hover:scale-105 hover:bg-primary-400 transition-all shadow-[0_0_30px_rgba(190,242,100,0.2)]">
-            Claim Offer <i class="fas fa-arrow-right"></i>
-          </button>
+          <span class="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-white/10 border border-white/10 text-slate-400 px-8 py-4 rounded-2xl font-extrabold text-base cursor-default">
+            Claim Offer (Coming Soon)
+          </span>
         </div>
       </div>
 
       <!-- PRICING CARDS -->
       <section class="mb-12 py-0">
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
 
           <!-- 1. FREE TRIAL -->
           <div class="pricing-card">
             <div class="card-header">
-              <span class="card-role-tag role-basic">Starter</span>
+              <span class="card-role-tag role-basic">Trial</span>
               <h3 class="card-title">Free Trial</h3>
               <p class="card-desc">Full visibility to test the platform.</p>
               <div class="price-block">
                 <span class="current-price">Free</span>
               </div>
               <div
-                class="text-xs font-bold text-slate-500 uppercase tracking-wide bg-transparent border border-white/5/5 border border-white/10 inline-block px-2 py-1 rounded">
+                class="text-xs font-bold text-slate-500 uppercase tracking-wide bg-transparent border border-white/10 inline-block px-2 py-1 rounded">
                 3 Days Access
               </div>
             </div>
             <ul class="feature-list">
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full platform visibility</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Portfolio Templates (Preview)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Dashboard (Read-only)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Resume Creation (1 Only)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Smart Calendar (Preview)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI Tutor Knott (5 msgs/day)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Target Role Access (1)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Skill Analysis (1) <i
-                  class="fas fa-info-circle tooltip-icon"
-                  data-tooltip="How many times user can generate skill-gap insights"></i></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Agent Roadmap (Basic 5 Roles)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Certification on Role Completion <i class="fas fa-info-circle tooltip-icon" data-tooltip="As per the roles completion the certification will be generated."></i></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full AI Tutor (Knott) Access</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full AI Recommendations</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Target Roles Access</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full AI Skill Gap Analysis</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full AI Roadmaps</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full AI Interview Support</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Career Certifications</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Smart Calendar</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Portfolio Builder</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Smart Dashboard</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Resume Builder</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Resume Downloads</li>
+              <li class="feature-item"><i class="fas fa-times feature-icon cross"></i> Referral Program</li>
+              <li class="feature-item"><i class="fas fa-times feature-icon cross"></i> Priority Support</li>
             </ul>
-            <button onclick="initiatePayment('free', 0)" class="card-btn btn-outline">Start Trial</button>
+            <div class="mt-auto pt-4 text-xs text-slate-500 italic mb-2">Best for: Ambitious learners starting out.</div>
+            <span class="card-btn btn-outline opacity-50 cursor-default text-center inline-block py-2">Coming Soon</span>
           </div>
 
-          <!-- 2. PRO PLAN -->
+          <!-- 2. 🌱 STARTER PLAN -->
           <div class="pricing-card">
             <div class="card-header">
-              <span class="card-role-tag role-pro">Core Career Building</span>
+              <span class="card-role-tag role-basic">Starter</span>
+              <h3 class="card-title">Starter Plan</h3>
+              <p class="card-desc">Perfect for students and early professionals who want structured career guidance and AI-powered learning tools.</p>
+              <div class="price-block">
+                <div class="price-row">
+                  <span class="old-price text-slate-400">₹299</span>
+                  <span class="current-price">₹149</span>
+                </div>
+                <span class="price-period">/mo</span>
+                <div class="savings-badge">Save ₹288/year</div>
+              </div>
+            </div>
+            <ul class="feature-list">
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Resume Builder</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 10 Resume Downloads per Month</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Portfolio Builder</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Smart Dashboard Access</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Up to 20 Target Roles</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 20 AI Skill Gap Analyses</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 100 AI Credits per Month with Knott AI Tutor</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI Career Recommendations</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Standard AI Career Roadmaps</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Standard Career Certifications</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Referral Program Access</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Smart Calendar</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI Interview Support</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Assessments & Readiness Tracking</li>
+            </ul>
+            <div class="mt-auto pt-4 text-xs text-slate-500 italic mb-2">Best for: Students beginning their career preparation journey.</div>
+            <span class="card-btn btn-outline opacity-50 cursor-default text-center inline-block py-2">Coming Soon</span>
+          </div>
+
+          <!-- 3. PRO PLAN -->
+          <div class="pricing-card">
+            <div class="card-header">
+              <span class="card-role-tag role-pro">Accelerate Your Career Growth</span>
               <h3 class="card-title">Pro Plan</h3>
-              <p class="card-desc">For individuals who want core career tools.</p>
+              <p class="card-desc">Designed for serious learners, job seekers, and professionals who want deeper insights and enhanced AI support.</p>
               <div class="price-block">
                 <div class="price-row">
                   <span class="old-price text-slate-400">₹399</span>
                   <span class="current-price">₹199</span>
                 </div>
                 <span class="price-period">/mo</span>
-                <div class="savings-badge">Save ₹480/year</div>
+                <div class="savings-badge">Save ₹389/year</div>
               </div>
             </div>
             <ul class="feature-list">
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything
-                  in Free +</strong></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Portfolio Templates (Full)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Dashboard (Full)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Resume Creation (Unlimited)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Resume Downloads (Unlimited)</li>
-              <li class="feature-item"><i class="fas fa-times feature-icon cross"></i> AI Tutor (Knott)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Target Role Access (10) <i
-                  class="fas fa-info-circle tooltip-icon" data-tooltip="Number of roles user can map & track"></i></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Skill Analysis (10)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Agent Roadmap (Up to 100 Roles)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Certification on Role Completion <i class="fas fa-info-circle tooltip-icon" data-tooltip="As per the roles completion the certification will be generated."></i></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything in Starter +</strong></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Resume Downloads</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Up to 40 Target Roles</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 40 AI Skill Gap Analyses</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 200 AI Credits per Month with Knott AI Tutor</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Advanced AI Career Roadmaps</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Advanced Career Certifications</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Priority Support</li>
             </ul>
-            <button onclick="initiatePayment('pro', isYearly ? 159 * 12 : 199)" class="card-btn btn-outline">Buy
-              Now</button>
+            <div class="mt-auto pt-4 text-xs text-slate-500 italic mb-2">Ideal For: Professionals preparing for multiple career paths, certifications, and job opportunities simultaneously.</div>
+            <span class="card-btn btn-outline opacity-50 cursor-default text-center inline-block py-2">Coming Soon</span>
           </div>
 
-          <!-- 3. PREMIUM PLAN -->
+          <!-- 4.PREMIUM PLAN -->
           <div class="pricing-card premium-pricing-card">
             <div class="most-popular">Most Popular</div>
             <div class="card-header">
-              <span class="card-role-tag role-premium">AI Intelligence</span>
-              <h3 class="card-title text-primary-300">Premium</h3>
-              <p class="card-desc">Power users wanting intelligence.</p>
+              <span class="card-role-tag role-premium">Unlimited Career Intelligence</span>
+              <h3 class="card-title text-primary-300">Premium AI</h3>
+              <p class="card-desc">Unlock the complete power of Way2Better with unlimited AI assistance, advanced career intelligence, and premium support.</p>
               <div class="price-block">
                 <div class="price-row">
                   <span class="old-price text-slate-400">₹599</span>
                   <span class="current-price text-primary-300">₹299</span>
                 </div>
                 <span class="price-period">/mo</span>
-                <div class="savings-badge">Save ₹720/year</div>
+                <div class="savings-badge">Save ₹589/year</div>
               </div>
             </div>
             <ul class="feature-list">
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything
-                  in Pro +</strong></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI Tutor Knott (Unlimited)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Priority AI Responses</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Smart Recommendations</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Advanced Insights</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Target Role Access (Unlimited) <i
-                  class="fas fa-info-circle tooltip-icon" data-tooltip="Access over 5000+ industry roles"></i></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Skill Analysis (Unlimited)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Agent Roadmap (1000+ Roles)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Certification on Role Completion <i class="fas fa-info-circle tooltip-icon" data-tooltip="As per the roles completion the certification will be generated."></i></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything in Pro +</strong></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited Target Roles</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited AI Skill Gap Analyses</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited AI Tutor (Knott)</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Unlimited AI Career Roadmaps</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Premium AI-Powered Recommendations</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Advanced Certifications</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Priority Support</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Full Career Intelligence Platform Access</li>
             </ul>
-            <button onclick="initiatePayment('premium', isYearly ? 239 * 12 : 299)" class="card-btn btn-solid">Upgrade
-              Now</button>
+            <div class="mt-auto pt-4 text-xs text-slate-500 italic mb-2">Ideal For: Placement-focused students, career switchers, ambitious professionals, and anyone serious about accelerating career growth.</div>
+            <span class="card-btn btn-solid opacity-50 cursor-default text-center inline-block py-2">Coming Soon</span>
           </div>
 
-          <!-- 4. ENTERPRISE -->
+          <!-- 5.INSTITUTION PLAN -->
           <div class="pricing-card" style="background: rgba(52,211,153,.03); border-color: rgba(52,211,153,.15);">
             <div class="card-header">
-              <span class="card-role-tag role-enterprise">Career Intelligence Platform</span>
-              <h3 class="card-title">Enterprise</h3>
-              <p class="card-desc">For colleges, universities & teams.</p>
+              <span class="card-role-tag role-enterprise">Empower Every Student</span>
+              <h3 class="card-title">Institution Plan</h3>
+              <p class="card-desc">Built for colleges, universities, training institutes, and organizations looking to provide AI-powered career intelligence at scale.</p>
               <div class="price-block">
-                <span class="current-price text-3xl">Custom</span>
+                <span class="current-price text-3xl">Custom Pricing</span>
               </div>
             </div>
             <ul class="feature-list">
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything
-                  in Premium +</strong></li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Skill Matrix (Institution)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Custom Workflows</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Bulk User Management</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Role-based Access</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Dedicated Account Manager</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Agent Roadmap (Custom Roles)</li>
-              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Certification on Role Completion <i class="fas fa-info-circle tooltip-icon" data-tooltip="As per the roles completion the certification will be generated."></i></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> <strong class="text-white">Everything in Premium AI for students +</strong></li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> AI-Powered College Health Dashboard</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Placement Readiness Analytics</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Automated Institutional Reports</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> 24×7 Dedicated AI College Administrator</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Smart Alerts & Notifications</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Centralized Communication Hub</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Way2Better AI Assistant</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Institution-Wide Skill Gap Analysis</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Career Readiness Tracking</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Placement Management Dashboard</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Bulk Student Management</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Role-Based Access Control</li>
+              <li class="feature-item"><i class="fas fa-check feature-icon"></i> Dedicated Success Manager & Priority Support</li>
             </ul>
+            <div class="mt-auto pt-4 text-xs text-slate-500 italic mb-2">"The Complete AI-Powered Career Intelligence & Placement Operating System for Educational Institutions."</div>
             <button onclick="initiatePayment('enterprise', 0)" class="card-btn btn-outline"
               style="border-color: rgba(52,211,153,.3); color: #34d399;">Contact Sales</button>
           </div>
@@ -1011,85 +1081,110 @@
             <thead>
               <tr>
                 <th style="width: 25%;">Feature</th>
-                <th class="matrix-header-cell">Free Trial</th>
-                <th class="matrix-header-cell">Pro</th>
-                <th class="matrix-header-cell" style="color:#bef264; background:rgba(190,242,100,.05);">Premium</th>
-                <th class="matrix-header-cell">Institution</th>
+                <th class="matrix-header-cell">Free Trial (3 Days)</th>
+                <th class="matrix-header-cell">Starter ₹149</th>
+                <th class="matrix-header-cell">Pro ₹199</th>
+                <th class="matrix-header-cell" style="color:#bef264; background:rgba(190,242,100,.05);">Premium AI ₹299</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Portfolio Templates</td>
-                <td class="matrix-cell-center">Preview</td>
-                <td class="matrix-cell-center">Full</td>
-                <td class="matrix-cell-center" style="background:rgba(190,242,100,.03);">Full</td>
-                <td class="matrix-cell-center">Full</td>
+                <td>AI Tutor (Knott)</td>
+                <td class="matrix-cell-center text-slate-400">10 AI Credits</td>
+                <td class="matrix-cell-center text-slate-400">100 AI Credits / Month</td>
+                <td class="matrix-cell-center text-slate-400">200 AI Credits / Month</td>
+                <td class="matrix-cell-center font-bold text-primary-300" style="background:rgba(190,242,100,.03);">Unlimited</td>
               </tr>
               <tr>
-                <td>Dashboard</td>
-                <td class="matrix-cell-center">Read-only</td>
-                <td class="matrix-cell-center">Full</td>
-                <td class="matrix-cell-center" style="background:rgba(190,242,100,.03);">Full</td>
-                <td class="matrix-cell-center">Full</td>
+                <td>AI Career Recommendations</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);">Full</td>
               </tr>
               <tr>
-                <td>Resume Creation</td>
-                <td class="matrix-cell-center">1 Only</td>
-                <td class="matrix-cell-center">Unlimited</td>
-                <td class="matrix-cell-center" style="background:rgba(190,242,100,.03);">Unlimited</td>
-                <td class="matrix-cell-center">Unlimited</td>
+                <td>Target Roles</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">20</td>
+                <td class="matrix-cell-center text-slate-400">40</td>
+                <td class="matrix-cell-center font-bold text-primary-300" style="background:rgba(190,242,100,.03);">Unlimited</td>
               </tr>
               <tr>
-                <td>Resume Downloads</td>
-                <td class="matrix-cell-center text-slate-400"><i class="fas fa-times"></i></td>
+                <td>AI Skill Gap Analysis</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">20</td>
+                <td class="matrix-cell-center text-slate-400">40</td>
+                <td class="matrix-cell-center font-bold text-primary-300" style="background:rgba(190,242,100,.03);">Unlimited</td>
+              </tr>
+              <tr>
+                <td>AI Roadmaps</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Standard</td>
+                <td class="matrix-cell-center text-slate-400">Advanced</td>
+                <td class="matrix-cell-center font-bold text-primary-300" style="background:rgba(190,242,100,.03);">Unlimited</td>
+              </tr>
+              <tr>
+                <td>AI Interview Support</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
                 <td class="matrix-cell-center check-icon"><i class="fas fa-check"></i></td>
-                <td class="matrix-cell-center check-icon" style="background:rgba(190,242,100,.03);"><i
-                    class="fas fa-check"></i></td>
                 <td class="matrix-cell-center check-icon"><i class="fas fa-check"></i></td>
+                <td class="matrix-cell-center check-icon" style="background:rgba(190,242,100,.03);"><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Certifications</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Standard</td>
+                <td class="matrix-cell-center text-slate-400">Advanced</td>
+                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);">Advanced</td>
               </tr>
               <tr>
                 <td>Smart Calendar</td>
-                <td class="matrix-cell-center">Preview</td>
-                <td class="matrix-cell-center">Full</td>
-                <td class="matrix-cell-center" style="background:rgba(190,242,100,.03);">Full</td>
-                <td class="matrix-cell-center">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);">Full</td>
               </tr>
               <tr>
-                <td>AI Tutor – Knott</td>
-                <td class="matrix-cell-center">5 msgs/day</td>
-                <td class="matrix-cell-center text-slate-400"><i class="fas fa-times"></i></td>
-                <td class="matrix-cell-center font-bold text-primary-300" style="background:rgba(190,242,100,.03);">
-                  Unlimited</td>
-                <td class="matrix-cell-center">Unlimited</td>
+                <td>Portfolio Builder</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);">Full</td>
               </tr>
               <tr>
-                <td>Target Role Access</td>
-                <td class="matrix-cell-center">1</td>
-                <td class="matrix-cell-center">10</td>
-                <td class="matrix-cell-center font-bold" style="background:rgba(190,242,100,.03);">Unlimited</td>
-                <td class="matrix-cell-center">Unlimited</td>
+                <td>Smart Dashboard</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400">Full</td>
+                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);">Full</td>
               </tr>
               <tr>
-                <td>AI-Powered Skill Analysis</td>
-                <td class="matrix-cell-center">1</td>
-                <td class="matrix-cell-center">10</td>
-                <td class="matrix-cell-center font-bold" style="background:rgba(190,242,100,.03);">Unlimited</td>
-                <td class="matrix-cell-center">Unlimited</td>
+                <td>Resume Builder</td>
+                <td class="matrix-cell-center text-slate-400">Unlimited</td>
+                <td class="matrix-cell-center font-bold text-white">Unlimited</td>
+                <td class="matrix-cell-center font-bold text-white">Unlimited</td>
+                <td class="matrix-cell-center font-bold text-white" style="background:rgba(190,242,100,.03);">Unlimited</td>
               </tr>
               <tr>
-                <td>Skill Matrix</td>
-                <td class="matrix-cell-center text-slate-400"><i class="fas fa-times"></i></td>
-                <td class="matrix-cell-center text-slate-400"><i class="fas fa-times"></i></td>
-                <td class="matrix-cell-center text-slate-400" style="background:rgba(190,242,100,.03);"><i
-                    class="fas fa-times"></i></td>
+                <td>Resume Downloads</td>
+                <td class="matrix-cell-center text-slate-400">Unlimited</td>
+                <td class="matrix-cell-center text-slate-400">10 / Month</td>
+                <td class="matrix-cell-center font-bold text-white">Unlimited</td>
+                <td class="matrix-cell-center font-bold text-white" style="background:rgba(190,242,100,.03);">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Referral Program</td>
+                <td class="matrix-cell-center text-slate-600"><i class="fas fa-times"></i></td>
                 <td class="matrix-cell-center check-icon"><i class="fas fa-check"></i></td>
+                <td class="matrix-cell-center check-icon"><i class="fas fa-check"></i></td>
+                <td class="matrix-cell-center check-icon" style="background:rgba(190,242,100,.03);"><i class="fas fa-check"></i></td>
               </tr>
               <tr>
-                <td>Support</td>
-                <td class="matrix-cell-center">Community</td>
-                <td class="matrix-cell-center">Standard</td>
-                <td class="matrix-cell-center" style="background:rgba(190,242,100,.03);">Priority</td>
-                <td class="matrix-cell-center">Dedicated</td>
+                <td>Priority Support</td>
+                <td class="matrix-cell-center text-slate-600"><i class="fas fa-times"></i></td>
+                <td class="matrix-cell-center text-slate-600"><i class="fas fa-times"></i></td>
+                <td class="matrix-cell-center check-icon"><i class="fas fa-check"></i></td>
+                <td class="matrix-cell-center check-icon" style="background:rgba(190,242,100,.03);"><i class="fas fa-check"></i></td>
               </tr>
             </tbody>
           </table>
@@ -1422,8 +1517,9 @@
     const labelMonthly = document.getElementById('label-monthly');
     const labelYearly = document.getElementById('label-yearly');
 
-    const proPrices = { m: { c: 199, o: 399 }, y: { c: 159, o: 319 } };
-    const premPrices = { m: { c: 299, o: 599 }, y: { c: 239, o: 479 } };
+    const starterPrices = { m: { c: 149, o: 299 }, y: { c: 125, o: 249 } };
+    const proPrices = { m: { c: 199, o: 399 }, y: { c: 166, o: 329 } };
+    const premPrices = { m: { c: 299, o: 599 }, y: { c: 249, o: 499 } };
 
     function togglePricing() { isYearly = !isYearly; updateState(); }
     function setMonthly() { isYearly = false; updateState(); }
@@ -1439,8 +1535,11 @@
         labelMonthly.classList.add('active');
         labelYearly.classList.remove('active');
       }
-      const proCard = document.querySelectorAll('.pricing-card')[1];
-      const premCard = document.querySelectorAll('.pricing-card')[2];
+      const cards = document.querySelectorAll('.pricing-card');
+      const starterCard = cards[1];
+      const proCard = cards[2];
+      const premCard = cards[3];
+      updatePrice(starterCard, starterPrices, isYearly);
       updatePrice(proCard, proPrices, isYearly);
       updatePrice(premCard, premPrices, isYearly);
     }
@@ -1482,148 +1581,127 @@
 
     /* ================= HIDE CURRENT PAGE FROM MENU ================= */
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Check for query parameters from redirect
+      const urlParams = new URLSearchParams(window.location.search);
+      const userParam = urlParams.get('user');
+      const planParam = urlParams.get('plan');
+      const yearlyParam = urlParams.get('yearly');
+
+      if (userParam) {
+        try {
+          const userData = JSON.parse(decodeURIComponent(userParam));
+          userData._pricingSessionAt = Date.now(); // Stamp session time for auth validation
+          localStorage.setItem("currentUser", JSON.stringify(userData));
+          console.log("Logged in user from redirect:", userData);
+        } catch (e) {
+          console.error("Failed to parse user data from redirect URL", e);
+        }
+      }
+
       const currentPath = window.location.pathname.split('/').pop() || 'index.html';
       document.querySelectorAll('#mobile-menu nav a').forEach(link => {
         if (link.getAttribute('href') === currentPath) link.classList.add('hidden');
       });
-      checkActiveSubscription();
+
+      checkActiveSubscription().then(() => {
+        // If a plan was selected before redirecting to login, trigger payment automatically
+        if (planParam) {
+          const isPlanYearly = yearlyParam === 'true';
+          let amount = 0;
+          if (planParam === 'starter') {
+            amount = isPlanYearly ? 1500 : 149;
+          } else if (planParam === 'pro') {
+            amount = isPlanYearly ? 1999 : 199;
+          } else if (planParam === 'premium') {
+            amount = isPlanYearly ? 2999 : 299;
+          }
+
+          // Ensure the yearly switch matches the plan's billing type
+          if (isPlanYearly !== isYearly) {
+            isYearly = isPlanYearly;
+            updateState();
+          }
+
+          // Clean URL parameters using history API so they aren't visible or re-triggered
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.search = '';
+          window.history.replaceState({}, document.title, cleanUrl.toString());
+
+          // Trigger checkout
+          initiatePayment(planParam, amount);
+        } else if (userParam) {
+          // If logged in via redirect but no pending plan, just clean the user param from URL
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete('user');
+          window.history.replaceState({}, document.title, cleanUrl.toString());
+        }
+      });
     });
 
-    function selectProAnnual() {
+    function selectStarterAnnual() {
       setYearly();
-      const proCard = document.querySelectorAll('.pricing-card')[1];
-      if (proCard) {
-        proCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        proCard.classList.add('card-highlight-glow');
+      const starterCard = document.querySelectorAll('.pricing-card')[1];
+      if (starterCard) {
+        starterCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        starterCard.classList.add('card-highlight-glow');
         setTimeout(() => {
-          initiatePayment('pro', 159 * 12);
+          initiatePayment('starter', 1500);
         }, 800);
       }
     }
 
     /* ================= SUBSCRIPTION & PAYMENT ================= */
     async function initiatePayment(planName, amount) {
-      const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
-      if (!currentUser) {
-        alert("Please login or create an account to subscribe.");
-        window.location.href = `${window.CONFIG.LOGIN_URL}?redirect=${encodeURIComponent(window.location.href)}`;
-        return;
-      }
-      if (planName === 'free') { alert("You are already on the Free Trial. If it's expired, please select a paid plan."); return; }
-      if (planName === 'enterprise') { alert("Redirecting to contact sales..."); window.location.href = "mailto:sales@way2better.com"; return; }
+      if (planName === 'enterprise') { window.location.href = "mailto:sales@way2better.com"; return; }
+      showToast('Way2Better is currently in the final stages of testing and platform validation. Purchasing will be available soon.', 'info');
+      return;
+    }
+    }
 
-      try {
-        // 1. Create order on the backend (amount converted to paise)
-        const orderRes = await fetch(`${BACKEND_URL}/create-order`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            amount: amount * 100, // INR to Paise
-            currency: 'INR',
-            receipt: `rcpt_${currentUser.id || currentUser.userId || 'usr'}_${Date.now()}`
-          })
-        });
+    /* ================= AUTH REQUIRED MODAL ================= */
+    let _authPendingPlan = null;
+    let _authPendingAmount = null;
 
-        if (!orderRes.ok) {
-          const errorData = await orderRes.json();
-          throw new Error(errorData.message || 'Failed to create order on server.');
-        }
+    function showAuthModal(planName, amount) {
+      _authPendingPlan  = planName;
+      _authPendingAmount = amount;
+      const planLabel   = planName.charAt(0).toUpperCase() + planName.slice(1);
+      const billingText = isYearly ? '/ year (billed annually)' : '/ month';
+      document.getElementById('auth-plan-badge').textContent = planLabel + ' Plan';
+      document.getElementById('auth-plan-desc').innerHTML =
+        `You've selected the <strong class="text-white">${planLabel} Plan</strong> —
+        <strong class="text-primary-300">₹${amount} ${billingText}</strong>.<br>
+        Create a free account or sign in to complete your purchase.`;
+      document.getElementById('auth-required-modal').classList.remove('hidden');
+    }
 
-        const orderData = await orderRes.json();
+    function hideAuthModal() {
+      document.getElementById('auth-required-modal').classList.add('hidden');
+    }
 
-        // 2. Fetch public Razorpay Key ID dynamically
-        const keyRes = await fetch(`${BACKEND_URL}/razorpay-key`);
-        if (!keyRes.ok) {
-          throw new Error('Failed to retrieve Razorpay Key configuration from server.');
-        }
-        const { keyId } = await keyRes.json();
+    function authModalSignup() {
+      const redirectUrl = new URL(window.location.href);
+      redirectUrl.searchParams.set('plan', _authPendingPlan);
+      redirectUrl.searchParams.set('yearly', isYearly);
+      window.location.href = `${window.CONFIG.REGISTER_URL}?redirect=${encodeURIComponent(redirectUrl.toString())}`;
+    }
 
-        // 3. Launch Razorpay Checkout Modal
-        const options = {
-          key: keyId,
-          amount: orderData.amount,
-          currency: orderData.currency,
-          name: "Way2Better",
-          description: `Subscription: ${planName.toUpperCase()} Plan`,
-          image: "/logo.png",
-          order_id: orderData.order_id,
-          handler: async function (response) {
-            try {
-              const startDate = new Date();
-              const endDate = new Date();
-              if (isYearly) {
-                endDate.setFullYear(endDate.getFullYear() + 1);
-              } else {
-                endDate.setMonth(endDate.getMonth() + 1);
-              }
+    function authModalLogin() {
+      const redirectUrl = new URL(window.location.href);
+      redirectUrl.searchParams.set('plan', _authPendingPlan);
+      redirectUrl.searchParams.set('yearly', isYearly);
+      window.location.href = `${window.CONFIG.LOGIN_URL}?redirect=${encodeURIComponent(redirectUrl.toString())}`;
+    }
 
-              // 4. Send payment signatures to verify-payment endpoint
-              const verifyRes = await fetch(`${BACKEND_URL}/verify-payment`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  userId: currentUser.id || currentUser.userId,
-                  planName: planName,
-                  price: amount,
-                  startDate: startDate.toISOString(),
-                  endDate: endDate.toISOString()
-                })
-              });
-
-              const verifyData = await verifyRes.json();
-
-              if (verifyRes.ok && verifyData.success) {
-                // Update local storage status
-                const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-                user.isSubscribed = true;
-                user.trialExpired = false;
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                
-                alert("Payment verified and subscription activated successfully! Redirecting to dashboard.");
-                window.location.href = `/myaccount.html`;
-              } else {
-                alert("Payment verification failed: " + (verifyData.message || 'Unknown verification error.'));
-              }
-            } catch (verifyErr) {
-              console.error('Signature verification call failed:', verifyErr);
-              alert("Server error verifying signature. Please contact support.");
-            }
-          },
-          prefill: {
-            name: currentUser.name || currentUser.full_name || "",
-            email: currentUser.email || "",
-            contact: currentUser.phone || currentUser.contact_number || ""
-          },
-          theme: {
-            color: "#65a30d"
-          },
-          modal: {
-            ondismiss: function () {
-              console.log("Razorpay Checkout Modal dismissed by customer.");
-            }
-          }
-        };
-
-        const rzp = new window.Razorpay(options);
-
-        rzp.on('payment.failed', function (response) {
-          console.error("Payment transaction failed:", response.error);
-          alert(`Payment failed: ${response.error.description || 'Transaction declined.'}`);
-        });
-
-        rzp.open();
-
-      } catch (err) {
-        console.error('Razorpay Checkout error:', err);
-        alert('An error occurred during checkout setup: ' + err.message);
-      }
+    /* ================= TOAST NOTIFICATION ================= */
+    let _toastTimer = null;
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast-notif');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.className = `toast-notif ${type} show`;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => toast.classList.remove('show'), 4500);
     }
 
     async function checkActiveSubscription() {
@@ -1687,6 +1765,50 @@
       window.addEventListener('resize', initHeroParticles);
     }
   </script>
+
+  <!-- ===== AUTH REQUIRED MODAL ===== -->
+  <div id="auth-required-modal" class="fixed inset-0 z-[200] hidden">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-md" onclick="hideAuthModal()"></div>
+    <!-- Card -->
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div id="auth-modal-card" class="relative w-full max-w-[440px] bg-[#0B100C] border border-white/10 rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.7)] overflow-hidden">
+        <!-- Gradient top bar -->
+        <div class="h-[3px] bg-gradient-to-r from-emerald-400 via-primary-300 to-blue-400"></div>
+        <div class="p-8">
+          <!-- Lock icon -->
+          <div class="w-14 h-14 rounded-2xl bg-primary-300/10 border border-primary-300/20 flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-lock text-primary-300 text-xl"></i>
+          </div>
+          <!-- Plan badge -->
+          <p id="auth-plan-badge" class="text-center text-xs font-bold uppercase tracking-widest text-primary-300 bg-primary-300/10 border border-primary-300/20 rounded-full px-4 py-1.5 mb-4 mx-auto w-fit"></p>
+          <h2 class="text-2xl font-black text-white text-center mb-2">One step away!</h2>
+          <p id="auth-plan-desc" class="text-slate-400 text-sm text-center mb-7 leading-relaxed"></p>
+          <!-- Action buttons -->
+          <div class="space-y-3">
+            <button onclick="authModalSignup()"
+              class="w-full flex items-center justify-center gap-2 bg-primary-300 text-slate-950 py-3.5 rounded-xl font-black text-sm transition-all hover:bg-primary-400 hover:shadow-[0_0_25px_rgba(190,242,100,0.35)] active:scale-95">
+              <i class="fas fa-user-plus"></i> Create Account &amp; Continue
+            </button>
+            <button onclick="authModalLogin()"
+              class="w-full flex items-center justify-center gap-2 border border-white/15 text-white py-3.5 rounded-xl font-bold text-sm transition-all hover:border-primary-300/40 hover:bg-white/5 active:scale-95">
+              <i class="fas fa-sign-in-alt"></i> Sign In to Existing Account
+            </button>
+          </div>
+          <p class="text-xs text-slate-600 text-center mt-5">Your selected plan will be waiting after you sign in.</p>
+        </div>
+        <!-- Close button -->
+        <button onclick="hideAuthModal()"
+          class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-white transition-all">
+          <i class="fas fa-times text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-notif" class="toast-notif"></div>
+
 </body>
 
 </html>
